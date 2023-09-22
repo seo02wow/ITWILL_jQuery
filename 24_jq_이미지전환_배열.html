@@ -1,0 +1,93 @@
+<! doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title>이미지전환</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    div {
+        width: 320px;
+        margin: 0 auto;
+        position: relative;
+    }
+    div > a{
+        /* 위치 설정 */
+        position: absolute; /*부모요소 기준으로 위치 설정*/
+        top: 150px;
+        /* 모양(형태), 색상 */
+        width: 50px; height: 50px;
+        background-color: lightblue;
+        border-radius: 25%;
+        /* 텍스트 설정 */
+        text-decoration: none;
+        text-align: center;
+        line-height: 50px; /*height와 동일하게 처리하면 세로뱡항 중앙정렬 */
+    }
+    #prev { left: 20px; }
+    #next { right: 20px; }
+</style>
+<script>
+    // prev,next : 버튼이 클릭되었을 때 처리
+    // 이미지 파일명을 배열에 저장해서 사용 
+    // let imgNames =["bimg01.jpg", "bimg02.jpg", ...];
+    //-------------------------------
+    //let imgNames =["bimg01.jpg", "bimg02.jpg", "bimg03.jpg"
+    //                  ,"bimg04.jpg", "bimg05.jpg", "bimg06.jpg"
+    //                  ,"bimg07.jpg", "bimg08.jpg", "bimg09.jpg"
+    //                  ,"bimg10.jpg"];
+    
+    // 배열에 데이터 입력 
+    let imgNames = new Array(10);
+    console.log(imgNames.toString());
+    console.log("imgNames.length : " + imgNames.length);
+    
+    for (let i = 0; i < imgNames.length; i++){
+        //let imgNum = i + 1;
+        //imgNum = imgNum < 10 ? "0" + imgNum : imgNum;
+        //imgNames[i] = "bimg" + imgNum + ".jpg";
+        imgNames[i] = "bimg" + (i+1).toString().padStart(2,"0") + ".jpg";
+    }
+    
+    console.log(imgNames.toString());
+    console.log("----------");
+    
+    imgNames = [];
+    console.log("imgNames.length : " + imgNames.length);
+    
+    while(imgNames.length < 10){
+        let imgNum = (imgNames.length + 1).toString().padStart(2,"0");
+        imgNames.push("bimg" + imgNum + ".jpg");
+    }
+    console.log(imgNames.toString());
+    
+    
+    $(document).ready(function(){
+        let idx = 0;
+        $("#next").click(function(){
+            idx++;
+            if(idx > imgNames.length - 1) idx = 0;
+            console.log("next 실행 시 idx : " + idx);
+            $("img").prop("src","images/" + imgNames[idx]);
+        });
+        
+        $("#prev").click(function(){
+            idx--;
+            if(idx < 0) idx = imgNames.length - 1;//배열의 마지막 데이터 사용
+             console.log("prev 실행 시 idx : " + idx);
+            $("img").prop("src","images/" + imgNames[idx]);
+        });
+    });
+</script>
+</head>
+<body>
+    <div>
+        <img src="images/bimg01.jpg" alt="상품이미지">
+        <a id="prev" href="#">prev</a>
+        <a id="next" href="#">next</a>
+    </div>
+    
+</body>
+
+
+
+</html>

@@ -1,0 +1,70 @@
+<! doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title>이미지전환</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+    div {
+        width: 320px;
+        margin: 0 auto;
+        position: relative;
+    }
+    div > a{
+        /* 위치 설정 */
+        position: absolute; /*부모요소 기준으로 위치 설정*/
+        top: 150px;
+        /* 모양(형태), 색상 */
+        width: 50px; height: 50px;
+        background-color: lightblue;
+        border-radius: 25%;
+        /* 텍스트 설정 */
+        text-decoration: none;
+        text-align: center;
+        line-height: 50px; /*height와 동일하게 처리하면 세로뱡항 중앙정렬 */
+    }
+    #prev { left: 20px; }
+    #next { right: 20px; }
+</style>
+<script>
+    //prev, next : 버튼이 클릭되었을 때 처리
+    $(document).ready(function(){
+        // next 클릭 시 : 다음 이미지 표시(img 태그의 src의 속성값을 변경 )
+        let imgNum = 1;
+       $("#next").click(function(){
+           imgNum++;
+           if (imgNum > 10) imgNum = 1; // 처음 이미지 번호로 변경 
+           console.log("next 클릭~ imgNum : " + imgNum); 
+           if(imgNum < 10) {
+               imgNum = "0" + imgNum;
+           }
+           
+           $("img").prop("src","images/bimg" + imgNum + ".jpg");
+           
+       }); 
+        // (실습)prev 클릭 시 : 이전 이미지 표시
+        $("#prev").click(function(){
+           imgNum--;
+           if (imgNum < 1) imgNum = 10; // 처음 이미지 번호로 변경 
+           console.log("prev 클릭~ imgNum : " + imgNum); 
+           if(imgNum < 10) {
+               imgNum = "0" + imgNum;
+           }
+           $("img").prop("src","images/bimg" + imgNum + ".jpg");
+           
+       }); 
+    });
+</script>
+</head>
+<body>
+    <div>
+        <img src="images/bimg01.jpg" alt="상품이미지">
+        <a id="prev" href="#">prev</a>
+        <a id="next" href="#">next</a>
+    </div>
+    
+</body>
+
+
+
+</html>
